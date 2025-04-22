@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .score-container {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        .score {
+            margin: 10px;
+        }
+        .riddle-container {
+            margin: 20px 0;
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html">Back to Main Page</a>
+    <h1>Riddle Generator</h1>
+
+    <div class="score-container">
+        <div class="score">
+            <span>Your Score: </span><span id="userScore">0</span>
+        </div>
+        <div class="score">
+            <span>Computer's Score: </span><span id="computerScore">0</span>
+        </div>
+    </div>
+
+    <div class="riddle-container">
+        <p id="riddle"></p>
+        <div class="choices">
+            <button onclick="checkAnswer(0)" id="choice0"></button>
+            <button onclick="checkAnswer(1)" id="choice1"></button>
+            <button onclick="checkAnswer(2)" id="choice2"></button>
+            <button onclick="checkAnswer(3)" id="choice3"></button>
+        </div>
+    </div>
+
+    <script>
+        const riddles = [
+            {
+                question: "What has keys but can't open locks?",
+                options: ["Piano", "Map", "Computer", "Book"],
+                correctAnswer: 0
+            },
+            {
+                question: "What gets wetter as it dries?",
+                options: ["Towel", "Rain", "Ocean", "Sun"],
+                correctAnswer: 0
+            },
+            {
+                question: "What has a head, a tail, but no body?",
+                options: ["Coin", "Snake", "Dog", "Fish"],
+                correctAnswer: 0
+            },
+            {
+                question: "The more you take, the more you leave behind. What am I?",
+                options: ["Footsteps", "Time", "Love", "Words"],
+                correctAnswer: 0
+            },
+            {
+                question: "What can travel around the world while staying in the corner?",
+                options: ["Stamp", "Wind", "Light", "Cloud"],
+                correctAnswer: 0
+            }
+        ];
+
+        let userScore = 0;
+        let computerScore = 0;
+        let correctAnswer;
+
+        function newRiddle() {
+            const riddleIndex = Math.floor(Math.random() * riddles.length);
+            const riddle = riddles[riddleIndex];
+            document.getElementById("riddle").textContent = riddle.question;
+            riddle.options.forEach((option, index) => {
+                document.getElementById(`choice${index}`).textContent = option;
+            });
+            correctAnswer = riddle.correctAnswer;
+        }
+
+        function checkAnswer(userChoice) {
+            const computerChoice = Math.floor(Math.random() * 4);
+
+            if (userChoice === correctAnswer) {
+                userScore++;
+                document.getElementById("userScore").textContent = userScore;
+                alert("Correct! Well done.");
+            } else {
+                alert("Oops! That's not correct.");
+            }
+
+            if (computerChoice === correctAnswer) {
+                computerScore++;
+                document.getElementById("computerScore").textContent = computerScore;
+            }
+
+            if (userScore >= 5) {
+                alert("You win! Congratulations!");
+                resetGame();
+            } else if (computerScore >= 5) {
+                alert("The computer wins! Better luck next time.");
+                resetGame();
+            }
+
+            newRiddle();
+        }
+
+        function resetGame() {
+            userScore = 0;
+            computerScore = 0;
+            document.getElementById("userScore").textContent = userScore;
+            document.getElementById("computerScore").textContent = computerScore;
+            alert("Game Reset! Let's start again.");
+            newRiddle();
+        }
+
+        // Start the first riddle
+        newRiddle();
+    </script>
+</body>
+</html>

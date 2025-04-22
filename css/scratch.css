@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(204, 182, 182);
+}
+/* Font Color & Font Family */
+body {
+    font-family: 'Arial', sans-serif;
+    color: white;
+    background-color: #b5b5da;
+}
+
+/* Styling for div containers */
+#header {
+    background-color: #16213e;
+    padding: 20px;
+    text-align: center;
+}
+
+#content {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #0f3460;
+}
+
+#footer {
+    background-color: #cfd3de;
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
